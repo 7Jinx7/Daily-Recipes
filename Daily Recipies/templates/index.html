@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Today's Recipe Inspiration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #336600; /* Green background */
+            color: #FFFF33; /* Yellow text */
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            color: #FFFF33; /* Yellow for the title */
+            font-size: 2.5rem;
+            margin-top: 20px;
+        }
+
+        .recipe-name {
+            color: #CC6600; /* Orange for recipe name */
+            font-size: 2rem;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .content {
+            margin: 30px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff; /* White background for each post */
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        li:hover {
+            transform: scale(1.05); /* Slight zoom effect on hover */
+        }
+
+        a {
+            color: #4CAF50; /* Green link color */
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        a:hover {
+            color: #FFEB3B; /* Change to yellow on hover */
+        }
+
+        .food-image {
+            width: 50%;  /* Make the image smaller (50% of its original size) */
+            max-width: 500px;  /* Set a max-width to limit the size */
+            margin-top: 20px;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Displaying the uploaded image of food (pasta) -->
+    <img src="{{ url_for('static', filename='pasta.png') }}" alt="Pasta Image" class="food-image">
+    
+    <h1>Today's Recipe Inspiration from r/recipes</h1>
+
+    <div class="content">
+        {% if posts %}
+            <ul>
+                {% for post in posts %}
+                    <li>
+                        <p class="recipe-name">{{ post.title }}</p>
+                        <a href="{{ post.link }}" target="_blank">View Recipe</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No posts found or there was an error fetching data. Try again later.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+
